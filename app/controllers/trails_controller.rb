@@ -11,6 +11,22 @@ class TrailsController < ApplicationController
   def create
     @trail = Trail.create(trail_params)
   end
+
+  def show
+    @trail = Trail.find(params[:id])
+  end
+
+  def edit
+    @trail = Trail.find(params[:id])
+  end
+
+
+  def update
+    @trail = Trail.find(params[:id])
+    @trail.update(trail_params)
+   
+    redirect_to trail_path(@trail)
+  end
   
   private
 
