@@ -1,0 +1,2 @@
+class TrailRating < ApplicationRecord
+end
