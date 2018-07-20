@@ -9,4 +9,9 @@ User.destroy_all
 Trail.destroy_all
 TrailRating.destroy_all
 
-User.create(username: "FonzMP", password: "password", email: "fonzmp@gmail.com")
+a = User.create(username: "FonzMP", password: "password", email: "fonzmp@gmail.com")
+ph = User.create(username: "Phteve", password: "password", email: "steve@steve.com")
+
+dc = Trail.create(name: "Dead Cow Trail", length: 8.6)
+two = Trail.create(name: "22 Day Trail", length: 36.2)
+cs = Trail.create(name: "Camper Shell", length: 10.8)
