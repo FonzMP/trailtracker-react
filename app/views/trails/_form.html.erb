@@ -1,0 +1,12 @@
+<%= form_for @trail do |f| %>
+  <%= f.label "Name:" %>
+  <br>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label "Length:" %>
+  <br>
+  <%= f.number_field :length, min: 0, max: 50, step: 0.1 %>
+  <br>
+  <br>
+  <%= f.submit %>
+<% end %>

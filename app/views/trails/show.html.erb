@@ -1,0 +1,8 @@
+<%= @trail.name %>
+<br>
+<%= @trail.length %>
+<br>
+<br>
+<%= link_to "Edit Trail", edit_trail_path(@trail) %>
+<br>
+<%= link_to "Delete Trail", @trail, method: :delete, data: { confirm: "Are you sure?" } %>
