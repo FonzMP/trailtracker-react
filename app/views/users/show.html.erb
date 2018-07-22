@@ -4,27 +4,29 @@
 <br>
 
 <% @user.trail_ratings.each do |tr| %>
-  <strong>Name: </strong>
-  <br>
-  <%= tr.trail.name %>
-  <br>
-  <br>
-  <strong>Length: </strong>
-  <br>
-  <%= tr.trail.length %>
-  <br>
-  <br>
-  <strong>Your Rating: </strong>
-  <br>
-  <%= tr.rating %>
-  <br>
-  <br>
-  <%= link_to "Edit Your Trail Rating", edit_trail_rating_path(tr) %>
-  <br>
-  <%= link_to "Delete Your Trail Rating", tr, method: :delete, data: { confirm: "Are you sure?" } %>  
-  <br>
-  <br>
-  <hr>
+  <% if tr.trail != nil %>
+    <strong>Name: </strong>
+    <br>
+    <%= tr.trail.name %>
+    <br>
+    <br>
+    <strong>Length: </strong>
+    <br>
+    <%= tr.trail.length %>
+    <br>
+    <br>
+    <strong>Your Rating: </strong>
+    <br>
+    <%= tr.rating %>
+    <br>
+    <br>
+    <%= link_to "Edit Your Trail Rating", edit_trail_rating_path(tr) %>
+    <br>
+    <%= link_to "Delete Your Trail Rating", tr, method: :delete, data: { confirm: "Are you sure?" } %>  
+    <br>
+    <br>
+    <hr>
+  <% end %>
 <% end %>
 
 <% if @user.unowned_trails.size > 0 %>
