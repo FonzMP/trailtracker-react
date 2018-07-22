@@ -17,5 +17,9 @@ class ApplicationController < ActionController::Base
       
     redirect_to user_path(@user)
   end
-  
+
+  def logged_in?
+    !session[:user_id].blank?
+  end
+
 end
