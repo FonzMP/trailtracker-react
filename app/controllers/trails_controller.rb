@@ -9,9 +9,15 @@ class TrailsController < ApplicationController
   end
 
   def create
-    @trail = Trail.create(trail_params)
+    if !current_user
+      @message = ["You must be logged in to do that!"]
+      
+      redirect_to login_path
+    else
+      @trail = Trail.create(trail_params)
 
-    redirect_to trails_path
+      redirect_to trails_path
+    end
   end
 
   def show
