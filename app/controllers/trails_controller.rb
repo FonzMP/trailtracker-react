@@ -10,6 +10,8 @@ class TrailsController < ApplicationController
 
   def create
     @trail = Trail.create(trail_params)
+
+    redirect_to trails_path
   end
 
   def show
