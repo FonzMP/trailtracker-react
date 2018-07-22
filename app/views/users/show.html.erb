@@ -20,14 +20,18 @@
     <%= tr.rating %>
     <br>
     <br>
-    <%= link_to "Edit Your Trail Rating", edit_trail_rating_path(tr) %>
-    <br>
-    <%= link_to "Delete Your Trail Rating", tr, method: :delete, data: { confirm: "Are you sure?" } %>  
+    <% if validate_user %>
+      <%= link_to "Edit Your Trail Rating", edit_trail_rating_path(tr) %>
+      <br>
+      <%= link_to "Delete Your Trail Rating", tr, method: :delete, data: { confirm: "Are you sure?" } %>  
+    <% end %>
     <br>
     <br>
     <hr>
   <% end %>
 <% end %>
+
+<% if validate_user %>
 
 <% if @user.unowned_trails.size > 0 %>
   <p>Add a new trail and rating to your collection</p>
@@ -46,5 +50,6 @@
     <br>
     <%= f.submit %>
 
+    <% end %>
   <% end %>
 <% end %>
