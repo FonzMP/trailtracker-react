@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   resources :users
   resources :trails
-  resources :trail_ratings, only: [:create]
+  resources :trail_ratings, only: [:create, :edit, :destroy, :update]
   get '/signup', to: "users#new"
   get '/login', to: "sessions#new"
   post '/login', to: "sessions#create"
