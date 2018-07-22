@@ -1,5 +1,7 @@
 class TrailsController < ApplicationController
 
+  before_action :current_user
+
   def index
     @trails = Trail.all
   end
@@ -9,10 +11,10 @@ class TrailsController < ApplicationController
   end
 
   def create
-    if !current_user
-      @message = ["You must be logged in to do that!"]
+    if !logged_in?
+      @message = ["You must be logged in to create a trail. Please login below."]
       
-      redirect_to login_path
+      render "sessions/new"
     else
       @trail = Trail.create(trail_params)
 
@@ -37,9 +39,13 @@ class TrailsController < ApplicationController
   end
 
   def destroy
-    @trail = Trail.find(params[:id]).destroy
+    if !logged_in?
+      redirect_to login_path
+    else
+      @trail = Trail.find(params[:id]).destroy
 
-    redirect_to trails_path
+      redirect_to trails_path
+    end
   end
   
   private
