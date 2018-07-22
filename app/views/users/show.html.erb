@@ -3,6 +3,25 @@
 <br>
 <br>
 
+<% @user.trail_ratings.each do |tr| %>
+  <strong>Name: </strong>
+  <br>
+  <%= tr.trail.name %>
+  <br>
+  <br>
+  <strong>Length: </strong>
+  <br>
+  <%= tr.trail.length %>
+  <br>
+  <br>
+  <strong>Your Rating: </strong>
+  <br>
+  <%= tr.rating %>
+  <br>
+  <br>
+  <br>
+<% end %>
+
 <p>Add a new trail and rating to your collection</p>
 
 <%= form_for @trail_rating do |f| %>
