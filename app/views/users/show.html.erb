@@ -19,7 +19,12 @@
   <%= tr.rating %>
   <br>
   <br>
+  <%= link_to "Edit Your Trail Rating", edit_trail_rating_path(tr) %>
   <br>
+  <%= link_to "Delete Your Trail Rating", tr, method: :delete, data: { confirm: "Are you sure?" } %>  
+  <br>
+  <br>
+  <hr>
 <% end %>
 
 <p>Add a new trail and rating to your collection</p>
