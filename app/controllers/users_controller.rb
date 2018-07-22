@@ -11,23 +11,21 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    find_user
     @trail_rating = TrailRating.new
   end
 
   def create
     @user = User.create(user_params)
-    if @user.save
-      session[:user_id] = @user.id
-      
-      redirect_to user_path(@user)
+    if @user
+      set_user
     else
       render "new"
     end
   end
 
   def edit
-    @user = User.find(params[:id])
+    find_user
   end
 
   def update
@@ -37,12 +35,6 @@ class UsersController < ApplicationController
     else
       redirect_to trails_path
     end
-  end
-
-  def destroy
-    @user = User.find(params[:id]).destroy
-
-    redirect_to trails_path
   end
 
   private
