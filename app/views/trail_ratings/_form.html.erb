@@ -1,0 +1,15 @@
+<%= form_for @trail_rating do |f| %>
+  <%= f.hidden_field :user_id, value: @trail_rating.user.id %>
+  <%= f.label "Select Trail: " %>
+  <br>
+  <%= f.collection_select :trail_id, Trail.all, :id, :name %>
+  <br>
+  <br>
+  <%= f.label "Select Personal Rating:  " %>
+  <br>
+  <%= f.select "rating", options_for_select(1..5, 3) %>
+  <br>
+  <br>
+  <%= f.submit %>
+
+<% end %>
