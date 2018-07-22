@@ -1,7 +1,8 @@
 <h1>Welcome <%= @user.username %></h1>
 
-<br>
-<br>
+<% if @user.trail_ratings.blank? %>
+  <h3>You have no trails currently listed.</h3>
+<% end %>
 
 <% @user.trail_ratings.each do |tr| %>
   <% if tr.trail != nil %>
@@ -21,9 +22,9 @@
     <br>
     <br>
     <% if validate_user %>
-      <%= link_to "Edit Your Trail Rating", edit_trail_rating_path(tr) %>
+      <%= link_to "Edit This Trail Rating", edit_trail_rating_path(tr) %>
       <br>
-      <%= link_to "Delete Your Trail Rating", tr, method: :delete, data: { confirm: "Are you sure?" } %>  
+      <%= link_to "Delete This Trail Rating", tr, method: :delete, data: { confirm: "Are you sure?" } %>  
     <% end %>
     <br>
     <br>
@@ -43,7 +44,7 @@
     <%= f.collection_select :trail_id, @user.unowned_trails, :id, :name %>
     <br>
     <br>
-    <%= f.label "Select Personal Rating:  " %>
+    <%= f.label "Select Personal Rating: " %>
     <br>
     <%= f.select "rating", options_for_select(1..5, 3) %>
     <br>
