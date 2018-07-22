@@ -2,7 +2,7 @@ class TrailRatingsController < ApplicationController
 
   def create
     @trail_rating = TrailRating.create(trail_rating_params)
-    if @trail
+    if @trail_rating
       redirect_to user_path(@trail_rating.user)
     end
   end
