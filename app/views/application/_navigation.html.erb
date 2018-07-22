@@ -4,3 +4,9 @@
 <% else %>
   <p class="nav_link"><%= link_to "Log Out", logout_path, method: :delete %></p>
 <% end %>
+
+<% if @message %>
+  <% @message.each do |msg| %>
+    <%= msg %>
+  <% end %>
+<% end %>

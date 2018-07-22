@@ -17,7 +17,8 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete :user_id
+    @message = ["You have been successfully signed out! Thanks for visiting!"]
 
-    redirect_to trails_path
+    render "new"
   end
 end
