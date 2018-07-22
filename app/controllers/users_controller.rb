@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @trail_rating = TrailRating.new
   end
 
   def create
