@@ -7,10 +7,13 @@ class SessionsController < ApplicationController
   def create
     if request.env['omniauth.auth'] != nil
       @user = User.find_by(email: request.env['omniauth.auth'][:info][:email])
-      if @user
-        set_user
-      else
-        redirect_to login_path
+      if !@user
+        @user = User.create(username: request.env['omniauth.auth'][:info][:name], email: request.env['omniauth.auth'][:info][:email], password: request.env['omniauth.auth'][:extra][:raw_info][:id])
+        if @user
+          set_user
+        else
+          redirect_to login_path
+        end
       end
     else
       @user = User.where('username LIKE ?', "%#{params[:username]}%").first
