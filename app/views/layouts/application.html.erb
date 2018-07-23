@@ -10,6 +10,11 @@
   </head>
 
   <body>
+  <% if @user.errors %>
+    <% @user.errors.full_messages.each do |msg| %>
+      <%= msg %>
+    <% end %>
+  <% end %> 
   <%= render 'navigation' %>
     <%= yield %>
   </body>
