@@ -1,9 +1,9 @@
 <% if !@current_user %>
-  <p class="nav_link"><%= link_to "Sign Up!", new_user_path %></p>
   <p class="nav_link"><%= link_to "Log In", login_path %></p>
+  <p class="nav_link"><%= link_to "Sign Up!", new_user_path %></p>
 <% else %>
-  <p class="nav_link"><%= link_to "Your Profile Page", user_path(@current_user) %></p>
   <p class="nav_link"><%= link_to "Log Out", logout_path, method: :delete %></p>
+  <p class="nav_link"><%= link_to "Your Profile Page", user_path(@current_user) %></p>
 <% end %>
 
 <% if @message %>
