@@ -3,7 +3,12 @@ class TrailsController < ApplicationController
   before_action :current_user
 
   def index
-    @trails = Trail.all
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      binding.pry
+    else
+      @trails = Trail.all
+    end
   end
 
   def new
@@ -44,7 +49,7 @@ class TrailsController < ApplicationController
     else
       @trail = Trail.find(params[:id]).destroy
 
-      redirect_to trails_path
+      redirect_to user_path(@current_user)
     end
   end
   

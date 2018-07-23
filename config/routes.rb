@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
-  resources :users
+  resources :users do
+    resources :trails, only: [:show, :index]
+  end
   resources :trails
   resources :trail_ratings, only: [:create, :edit, :destroy, :update]
   get '/signup', to: "users#new"

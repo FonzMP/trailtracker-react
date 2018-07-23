@@ -1,9 +1,11 @@
-<% @trails.each do |trail| %>
-  <strong>Name: </strong><%= trail.name %>
+<% @user.trail_ratings.each do |tr| %>
+  <strong>Name: </strong><%= tr.trail.name %>
   <br>
-  <strong>Length: </strong><%= trail.length %> miles
+  <strong>Length: </strong><%= tr.trail.length %> miles
   <br>
-  <%= link_to "View #{trail.name}", trail_path(trail) %>
+  <strong>User Rating: </strong> <%= tr.rating %>
+  <br>
+  <%= link_to "View #{tr.trail.name}", trail_path(tr.trail) %>
   <br>
   <br>
 <% end %>
