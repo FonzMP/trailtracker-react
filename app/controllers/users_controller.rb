@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-    if @user
+    if @user.errors.empty?
       set_user
     else
       render "new"
