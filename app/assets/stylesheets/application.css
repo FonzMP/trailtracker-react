@@ -19,3 +19,8 @@
    float: right;
    margin-right: 30px;
  }
+
+ .field_with_errors {
+   border: solid red 1px;
+   max-width: 132px;
+ }
