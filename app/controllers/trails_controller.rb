@@ -5,7 +5,6 @@ class TrailsController < ApplicationController
   def index
     if params[:user_id]
       @user = User.find(params[:user_id])
-      binding.pry
     else
       @trails = Trail.all
     end
