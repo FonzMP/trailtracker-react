@@ -11,6 +11,7 @@ TrailRating.destroy_all
 
 a = User.create(username: "FonzMP", password: "password", email: "fonzmp@gmail.com")
 ph = User.create(username: "Phteve", password: "password", email: "steve@steve.com")
+alex = User.create(username: "Alex.Wilson", password: "password", email: "aw225404@ohio.edu")
 
 dc = Trail.create(name: "Dead Cow Trail", length: 8.6)
 two = Trail.create(name: "22 Day Trail", length: 36.2)
