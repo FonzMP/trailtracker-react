@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
   def create
     if request.env['omniauth.auth'] != nil
       @user = User.find_by(email: request.env['omniauth.auth'][:info][:email])
-      binding.pry
       if @user
         set_user
       else
