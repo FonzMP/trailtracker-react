@@ -12,4 +12,8 @@ class User < ApplicationRecord
     (Trail.all.map{|t| t.id} - self.trail_ids).map{|id| Trail.find(id)}
   end
 
+  def created_trails
+    Trail.where(created_by: self.id)
+  end
+
 end

@@ -1,9 +1,18 @@
 <h1>Users</h1>
 
 <% @users.each do |user| %>
-  <strong><%= link_to user.username, user_path(user) %></strong>
+  <strong><%= link_to user.username, user_trails_path(user) %></strong>
   <br>
   <%= user.email %>
   <br>
+  <% if user.trail_ratings.count > 0 %>
+    <%= user.trail_ratings.count %> <%= user.trail_ratings.count == 1 ? 'trail ' : 'trails ' %> ridden
+    <br>
+  <% end %>
+  <% if user.created_trails.count > 0 %>
+    <%= user.created_trails.count %> <%= user.created_trails.count == 1 ? 'trail ' : 'trails ' %>contributed
+    <br>
+  <% end %>
+  <hr>
   <br>
 <% end %>
