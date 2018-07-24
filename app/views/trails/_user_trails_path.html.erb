@@ -1,0 +1,12 @@
+<h1><%= @user.username %>'s Trails List </h1>
+  <% @user.trail_ratings.each do |tr| %>
+    <strong>Name: </strong><%= tr.trail.name %>
+    <br>
+    <strong>Length: </strong><%= tr.trail.length %> miles
+    <br>
+    <strong>User Rating: </strong> <%= tr.rating %>
+    <br>
+    <%= link_to "View #{tr.trail.name}", trail_path(tr.trail) %>
+    <br>
+    <br>
+  <% end %>
