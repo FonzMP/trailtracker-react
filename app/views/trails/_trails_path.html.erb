@@ -3,7 +3,7 @@
   <br>
   <strong>Length: </strong><%= trail.length %> miles
   <br>
-  <strong>Contributed by: </strong><%= trail.find_username %>
+  <strong>Contributed by: </strong><%= link_to trail.find_user.username, user_trails_path(trail.find_user) %>
   <br>
   <%= link_to "View #{trail.name}", trail_path(trail) %>
   <br>

@@ -1,4 +1,5 @@
 <%= form_for @trail do |f| %>
+  <%= f.hidden_field :created_by, :value => session[:user_id] %>
   <%= f.label "Name:" %>
   <br>
   <%= f.text_field :name %>

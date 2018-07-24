@@ -55,6 +55,6 @@ class TrailsController < ApplicationController
   private
 
   def trail_params
-    params.require(:trail).permit(:name, :length)
+    params.require(:trail).permit(:name, :length, :created_by)
   end
 end
