@@ -16,4 +16,16 @@ class User < ApplicationRecord
     Trail.where(created_by: self.id)
   end
 
+  def self.most_contributed
+    key_holder = 0
+    value_holder = 0
+    Trail.group(:created_by).count.each do |key, value|
+      if value > value_holder
+        value_holder = value
+        key_holder = key
+      end
+    end
+    User.find(key_holder).username
+  end
+
 end
