@@ -3,6 +3,7 @@ class CreateTrails < ActiveRecord::Migration[5.2]
     create_table :trails do |t|
       t.string :name
       t.float :length
+      t.integer :created_by
 
       t.timestamps
     end

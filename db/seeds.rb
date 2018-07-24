@@ -12,9 +12,9 @@ TrailRating.destroy_all
 a = User.create(username: "FonzMP", password: "password", email: "fonzmp@gmail.com")
 ph = User.create(username: "Phteve", password: "password", email: "steve@steve.com")
 
-dc = Trail.create(name: "Dead Cow Trail", length: 8.6)
-two = Trail.create(name: "22 Day Trail", length: 36.2)
-cs = Trail.create(name: "Camper Shell", length: 10.8)
+dc = Trail.create(name: "Dead Cow Trail", length: 8.6, created_by: 1)
+two = Trail.create(name: "22 Day Trail", length: 36.2, created_by: 1)
+cs = Trail.create(name: "Camper Shell", length: 10.8, created_by: 2)
 
 TrailRating.create(trail_id: dc.id, user_id: a.id, rating: 3)
 TrailRating.create(trail_id: two.id, user_id: ph.id, rating: 4)
