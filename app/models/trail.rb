@@ -1,6 +1,6 @@
 class Trail < ApplicationRecord
 
-  has_many :trail_ratings
+  has_many :trail_ratings, dependent: :delete_all
   has_many :users, through: :trail_ratings
 
   def find_user
