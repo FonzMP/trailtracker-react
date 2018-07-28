@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :current_user, only: [:index, :show, :edit]
+  before_action :current_user
 
   def index
     @users = User.all
@@ -12,7 +12,11 @@ class UsersController < ApplicationController
 
   def show
     find_user
-    @trail_rating = TrailRating.new
+    if !same_user?
+      redirect_to user_trails_path(@user)
+    else
+      @trail_rating = TrailRating.new
+    end
   end
 
   def create

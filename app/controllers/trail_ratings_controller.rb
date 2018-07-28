@@ -1,5 +1,7 @@
 class TrailRatingsController < ApplicationController
 
+  before_action :current_user
+
   def create
     @trail_rating = TrailRating.create(trail_rating_params)
     if @trail_rating
