@@ -9,10 +9,3 @@
 <p class="nav_link"><%= link_to "View all Users", users_path %></p>
 <% end %>
 <p class="nav_link"><%= link_to "Home", root_path %></p>
-
-
-<% if @message %>
-  <% @message.each do |msg| %>
-    <%= msg %>
-  <% end %>
-<% end %>
