@@ -22,6 +22,10 @@ class ApplicationController < ActionController::Base
     redirect_to user_path(@user)
   end
 
+  def same_user?
+    @current_user == @user
+  end
+
   def logged_in?
     !session[:user_id].blank?
   end
