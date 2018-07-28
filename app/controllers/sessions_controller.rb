@@ -43,7 +43,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete :user_id
-    @message = ["You have been successfully signed out! Thanks for visiting!"]
+    @log = ["You have been successfully signed out! Thanks for visiting!"]
 
     render "new"
   end
