@@ -16,11 +16,27 @@ class SessionsController < ApplicationController
         redirect_to login_path
       end
     else
-      @user = User.where('username LIKE ?', "%#{params[:username]}%").first
-      if @user && @user.authenticate(params[:password])
-        set_user
+      if params[:username].blank?
+        @message = ["We need a username to search by! You seem to have left it blank!"];
+
+        render "new"
       else
-        redirect_to login_path
+        @user = User.where('username LIKE ?', "%#{params[:username]}%").first
+        if @user && @user.authenticate(params[:password])
+          set_user
+        else
+          if !@user
+            @message = ["We couldn't find a user with that username"]
+
+            render "new"
+          else
+            if !@user.authenticate(params[:password])
+              @message = ["Sorry, that password is incorrect!"]
+              
+              render "new"
+            end
+          end
+        end
       end
     end
   end 
