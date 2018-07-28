@@ -12,10 +12,16 @@ class UsersController < ApplicationController
 
   def show
     find_user
-    if !same_user?
-      redirect_to user_trails_path(@user)
+    if !logged_in?
+      @message = ["You must be logged in to view user trails."]
+
+      render "sessions/new"
     else
-      @trail_rating = TrailRating.new
+      if !same_user?
+        redirect_to user_trails_path(@user)
+      else
+        @trail_rating = TrailRating.new
+      end
     end
   end
 
