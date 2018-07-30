@@ -1,13 +1,6 @@
 <h1>Please log in with your username</h1>
 
-<% if @message %>
-  <h3>Sorry, we experienced the following errors!</h3>
-  <% @message.each do |msg| %>
-    <%= msg %>
-    <br>
-    <br>
-  <% end %>
-<% end %>
+<%= render 'application/message' %>
 
 <% if @log %>
     <% @log.each do |log| %>

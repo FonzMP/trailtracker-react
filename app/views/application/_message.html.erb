@@ -1,0 +1,8 @@
+<% if @message %>
+  <h3>Sorry, we experienced the following errors!</h3>
+  <% @message.each do |msg| %>
+    <%= msg %>
+    <br>
+    <br>
+  <% end %>
+<% end %>

@@ -1,5 +1,7 @@
 <h1>Welcome <%= @user.username %></h1>
 
+<%= render 'application/message' %>
+
 <% if @user.trail_ratings.blank? %>
   <h3>You have no trails currently listed.</h3>
 <% end %>
