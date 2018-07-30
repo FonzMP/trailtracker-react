@@ -2,4 +2,4 @@
 
 <p>TrailTracker motorcycle app is an app designed to provide ease of mind for the solo, and/or safety concious rider in all of us. Our focus is to provide an application that assists in keeping our users safe while adventuring alone, in small groups, or with friends, in the great outdoors.</p>
 
-<h3>Most active contributor: </h3><h1> <%= User.most_contributed %></h1>
+<h3>Most active contributor: </h3><h1> <%= link_to User.most_contributed.username, user_path(User.most_contributed) %></h1>
