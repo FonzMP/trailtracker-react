@@ -25,7 +25,7 @@ class User < ApplicationRecord
         key_holder = key
       end
     end
-    @most_contributed = User.find(key_holder)
+    User.find(key_holder)
   end
 
 end
