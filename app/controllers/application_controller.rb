@@ -30,4 +30,14 @@ class ApplicationController < ActionController::Base
     !session[:user_id].blank?
   end
 
+  def invalid_user?
+    if !(@current_user.id == @trail.created_by)
+      @user = User.find(@current_user.id)
+      @trail_rating = TrailRating.new
+      @message = ["That is not your trail!"]
+
+      render 'users/show'
+    end
+  end
+
 end
