@@ -32,6 +32,10 @@ class TrailsController < ApplicationController
 
   def show
     @trail = Trail.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json {render json: @trail}
+    end
   end
 
   def edit
