@@ -3,12 +3,16 @@
 <%= render 'application/message' %>
 
 <div id="ui_buttons">
+  <%= button_tag "View All Trails", id: "trails" %>
   <%= button_tag "View trails you've created", id: "user-trails" %>
   <%= button_tag 'View Your Trail Ratings', id: "user-trail-ratings" %>
   <%= button_tag 'Add a New Trail', id: "add-trail" %>
   <%= button_tag 'Add a Trail Rating', id: "add-trail-rating" %>
 </div>
 <br>
+
+<div id="all_trails" class="hidden">
+</div>
 
 <div id="user_created_trails" class="hidden">
   <% @user.created_trails.each do |tr| %>
@@ -93,6 +97,15 @@
 <script type="text/javascript" charset="utf-8">
   $(function(){
 
+    $('#trails').click(function(e){
+      if ($(this).text() === "View All Trails") {
+        $(this).text("Hide All Trails")
+        $('#all_trails').removeClass('hidden')
+      } else {
+        $(this).text("View All Trails")
+        $('#all_trails').addClass('hidden')
+      }
+    })
 
     $('#user-trails').click(function(e){
       if ($(this).text() === "View trails you've created") {

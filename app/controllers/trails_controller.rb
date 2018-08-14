@@ -7,6 +7,10 @@ class TrailsController < ApplicationController
       @user = User.find(params[:user_id])
     else
       @trails = Trail.all
+      respond_to do |format|
+        format.html
+        format.json {render json: @trails}
+      end
     end
   end
 
