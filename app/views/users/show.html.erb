@@ -2,6 +2,13 @@
 
 <%= render 'application/message' %>
 
+<div id="ui_buttons">
+  <%= button_tag "View trails you've created", id: "user-trails" %>
+  <%= button_tag 'View Your Trail Ratings', id: "user-trail-ratings" %>
+  <%= button_tag 'Add a Trail Rating', id: "add-trail-rating" %>
+</div>
+<br>
+
 <div id="user_tr_display" class="hidden">
   <% if @user.trail_ratings.blank? %>
     <h3>You have no trails currently listed.</h3>
@@ -36,31 +43,68 @@
   <% end %>
 </div>
 
-<% if validate_user %>
 
-<% if @user.unowned_trails.size > 0 %>
-  <p>Add a new trail and rating to your collection</p>
+<div id="trail_ratings_form" class="hidden">
+  <% if validate_user %>
+  <% if @user.unowned_trails.size > 0 %>
+    <p>Add a new trail and rating to your collection</p>
 
-  <%= form_for @trail_rating do |f| %>
-    <%= f.hidden_field :user_id, value: @user.id %>
-    <%= f.label "Select Trail: " %>
-    <br>
-    <%= f.collection_select :trail_id, @user.unowned_trails, :id, :name %>
-    <br>
-    <br>
-    <%= f.label "Select Personal Rating: " %>
-    <br>
-    <%= f.select "rating", options_for_select(1..5, 3) %>
-    <br>
-    <br>
-    <%= f.submit %>
+    <%= form_for @trail_rating do |f| %>
+      <%= f.hidden_field :user_id, value: @user.id %>
+      <%= f.label "Select Trail: " %>
+      <br>
+      <%= f.collection_select :trail_id, @user.unowned_trails, :id, :name %>
+      <br>
+      <br>
+      <%= f.label "Select Personal Rating: " %>
+      <br>
+      <%= f.select "rating", options_for_select(1..5, 3) %>
+      <br>
+      <br>
+      <%= f.submit %>
 
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+</div>
 
 <script type="text/javascript" charset="utf-8">
   $(function(){
-    console.log('ready')
+
+
+    $('#user-trails').click(function(e){
+      e.preventDefault();
+      if ($(this).text() === "View trails you've created") {
+        $(this).text("Hide Your Trails")
+        $('#user_tr_display').removeClass('hidden')
+      } else {
+        $(this).text("View trails you've created")
+        $('#user_tr_display').addClass('hidden')
+      }
+    })
+
+    $('#user-trail-ratings').click(function(e){
+      e.preventDefault();
+      if ($(this).text() === "View Your Trail Ratings") {
+        $(this).text("Hide Your Trail Ratings")
+        $('#user_tr_display').removeClass('hidden')
+      } else {
+        $(this).text("View Your Trail Ratings")
+        $('#user_tr_display').addClass('hidden')
+      }
+    })
+
+    $('#add-trail-rating').click(function(e){
+      e.preventDefault();
+      if ($(this).text() === "Add a Trail Rating") {
+        $(this).text("Hide Trail Rating Form")
+        $('#trail_ratings_form').removeClass('hidden')
+      } else {
+        $(this).text("Add a Trail Rating")
+        $('#trail_ratings_form').addClass('hidden')
+      }
+    })
+
+
   })
 </script>
