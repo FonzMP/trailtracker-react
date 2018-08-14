@@ -37,6 +37,24 @@ function hideDetails(id, name) {
   });
 }
 
+function setMessage(post) {
+  post.done(function(trail) {
+    $("#success_message").html(`
+      <h3>You've successfully created ${trail.name} trail</h3>
+      <p><strong>Name: </strong>${trail.name}</p>
+      <p><strong>Length: </strong>${trail.length}</p>
+    `);
+    $("#trail_name").val("");
+    $("#trail_length").val("");
+  });
+}
+
+function clearMessage() {
+  setTimeout(function() {
+    $("#success_message").slideUp();
+  }, 5000);
+}
+
 function attachListeners() {
   $("#trails").click(function(e) {
     $.get("/trails.json", function(data) {
@@ -93,4 +111,12 @@ function attachListeners() {
     "Hide Trail Rating Form",
     "#trail_ratings_form"
   );
+
+  $("form#new_trail").submit(function(e) {
+    e.preventDefault();
+    const values = $(this).serialize();
+    const post = $.post("/trails", values);
+    setMessage(post);
+    clearMessage();
+  });
 }
