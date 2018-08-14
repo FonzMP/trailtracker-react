@@ -20,6 +20,7 @@ class UsersController < ApplicationController
       if !same_user?
         redirect_to user_trails_path(@user)
       else
+        @trail = Trail.new
         @trail_rating = TrailRating.new
       end
     end
