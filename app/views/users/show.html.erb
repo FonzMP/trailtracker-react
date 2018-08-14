@@ -9,6 +9,20 @@
 </div>
 <br>
 
+<div id="user_created_trails" class="hidden">
+  <% @user.created_trails.each do |tr| %>
+      <strong>Name: </strong>
+      <br>
+      <%= tr.name %>
+      <br>
+      <br>
+      <strong>Length: </strong>
+      <br>
+      <%= tr.length %>
+      <br>
+  <% end %>
+</div>
+
 <div id="user_tr_display" class="hidden">
   <% if @user.trail_ratings.blank? %>
     <h3>You have no trails currently listed.</h3>
@@ -64,6 +78,8 @@
       <%= f.submit %>
 
       <% end %>
+    <% else %>
+      <h4>Sorry, you have rated all the trails in our system!</h4>
     <% end %>
   <% end %>
 </div>
@@ -76,10 +92,10 @@
       e.preventDefault();
       if ($(this).text() === "View trails you've created") {
         $(this).text("Hide Your Trails")
-        $('#user_tr_display').removeClass('hidden')
+        $('#user_created_trails').removeClass('hidden')
       } else {
         $(this).text("View trails you've created")
-        $('#user_tr_display').addClass('hidden')
+        $('#user_created_trails').addClass('hidden')
       }
     })
 
