@@ -16,9 +16,16 @@
 </div>
 
 <div id="all_trails" class="hidden">
+  
 </div>
 
 <div id="user_created_trails" class="hidden">
+  <% if @user.created_trails == 0 %>
+    <h3>You have not contributed any trails yet.</h3>
+    <p>We welcome you to contribute by selecting the "Add a New Trail" link above!</p>
+  <% end %>
+
+  <h3> Trails Contributed by <%= @user.username %></h3>
   <% @user.created_trails.each do |tr| %>
       <strong>Name: </strong>
       <br>
@@ -39,6 +46,8 @@
   <% if @user.trail_ratings.blank? %>
     <h3>You have no trails currently listed.</h3>
   <% end %>
+
+  <h3>Trail Ratings from <%= @user.username %></h3>
 
   <% @user.trail_ratings.each do |tr| %>
     <% if tr.trail != nil %>
@@ -78,7 +87,7 @@
 <div id="trail_ratings_form" class="hidden">
   <% if validate_user %>
   <% if @user.unowned_trails.size > 0 %>
-    <p>Add a new trail and rating to your collection</p>
+    <h3>Add a new trail and rating to your collection</h3>
 
     <%= form_for @trail_rating do |f| %>
       <%= f.hidden_field :user_id, value: @user.id %>
