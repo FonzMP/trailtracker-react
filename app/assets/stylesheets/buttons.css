@@ -1,0 +1,20 @@
+.nav_link {
+  display: inline;
+  float: right;
+  margin-right: 30px;
+}
+
+.field_with_errors {
+  border: solid red 1px;
+  max-width: 132px;
+}
+
+.hidden {
+  display: none;
+}
+
+.backing {
+  background-color: lightgray;
+  outline: none;
+  box-shadow: 1px 3px 3px #ccc;
+}

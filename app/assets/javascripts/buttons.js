@@ -10,6 +10,51 @@ function toggleDisplay(buttonClicked, showText, hideText, renderedForm) {
   });
 }
 
+function applyHidden(clicked) {
+  const buttons = [
+    "trails",
+    "user-trails",
+    "user-trail-ratings",
+    "add-trail",
+    "add-trail-rating"
+  ];
+  const views = [
+    "#all_trails",
+    "#user_created_trails",
+    "#user_tr_display",
+    "#trail_form",
+    "#trail_ratings_form"
+  ];
+  for (let i = 0; i < buttons.length; i++) {
+    if (clicked.id === buttons[i]) {
+      $(views[jQuery.inArray(buttons[i], buttons)]).removeClass("hidden");
+      $("#" + buttons[i]).addClass("backing");
+      if (buttons[i] === "trails") {
+        $.get("/trails.json", function(data) {
+          $("#all_trails").html("<h3>All trails on TrailTracker</h3>");
+          data.forEach(function(trail) {
+            $("#all_trails").append(
+              `
+              <p><strong>Name: </strong>${trail.name}</p>
+              <div id="trail-info-${trail.id}">
+              <a href="#" id="trail-${trail.id}" data-trail="${
+                trail.id
+              }" class="trail-details" >View ${trail.name} Trail Info</a>
+              </div>
+              <br>
+              `
+            );
+          });
+          trailDetails();
+        });
+      }
+    } else {
+      $(views[jQuery.inArray(buttons[i], buttons)]).addClass("hidden");
+      $("#" + buttons[i]).removeClass("backing");
+    }
+  }
+}
+
 function clearMessage() {
   setTimeout(function() {
     $("#success_message").slideUp();
@@ -17,61 +62,9 @@ function clearMessage() {
 }
 
 function attachListeners() {
-  $("#trails").click(function() {
-    $.get("/trails.json", function(data) {
-      $("#all_trails").html("<h3>All trails on TrailTracker</h3>");
-      data.forEach(function(trail) {
-        $("#all_trails").append(
-          `
-          <p><strong>Name: </strong>${trail.name}</p>
-          <div id="trail-info-${trail.id}">
-          <a href="#" id="trail-${trail.id}" data-trail="${
-            trail.id
-          }" class="trail-details" >View ${trail.name} Trail Info</a>
-          </div>
-          <br>
-          `
-        );
-      });
-      trailDetails();
-    });
-
-    if ($(this).text() === "View All Trails") {
-      $(this).text("Hide All Trails");
-      $("#all_trails").removeClass("hidden");
-    } else {
-      $(this).text("View All Trails");
-      $("#all_trails").addClass("hidden");
-    }
+  $("button.user-nav").click(function() {
+    applyHidden(this);
   });
-
-  toggleDisplay(
-    "#user-trails",
-    "View Trails You've Created",
-    "Hide Your Trails",
-    "#user_created_trails"
-  );
-
-  toggleDisplay(
-    "#user-trail-ratings",
-    "View Your Trail Ratings",
-    "Hide Your Trail Ratings",
-    "#user_tr_display"
-  );
-
-  toggleDisplay(
-    "#add-trail",
-    "Add a New Trail",
-    "Hide New Trail Form",
-    "#trail_form"
-  );
-
-  toggleDisplay(
-    "#add-trail-rating",
-    "Add a Trail Rating",
-    "Hide Trail Rating Form",
-    "#trail_ratings_form"
-  );
 
   $("form#new_trail_rating").submit(function(e) {
     e.preventDefault();

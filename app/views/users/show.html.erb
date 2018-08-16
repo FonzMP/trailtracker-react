@@ -3,11 +3,11 @@
 <%= render 'application/message' %>
 
 <div id="ui_buttons">
-  <%= button_tag "View All Trails", id: "trails" %>
-  <%= button_tag "View Trails You've Created", id: "user-trails" %>
-  <%= button_tag 'View Your Trail Ratings', id: "user-trail-ratings" %>
-  <%= button_tag 'Add a New Trail', id: "add-trail" %>
-  <%= button_tag 'Add a Trail Rating', id: "add-trail-rating" %>
+  <%= button_tag "View All Trails", id: "trails", class: "user-nav" %>
+  <%= button_tag "View Trails You've Created", id: "user-trails", class: "user-nav" %>
+  <%= button_tag 'View Your Trail Ratings', id: "user-trail-ratings", class: "user-nav" %>
+  <%= button_tag 'Add a New Trail', id: "add-trail", class: "user-nav" %>
+  <%= button_tag 'Add a Trail Rating', id: "add-trail-rating", class: "user-nav" %>
 </div>
 <br>
 
@@ -33,7 +33,6 @@
       <br>
       <br>
       <strong>Length: </strong>
-      <br>
       <br>
       <%= tr.length %>
       <br>
@@ -112,6 +111,6 @@
 
 <script type="text/javascript" charset="utf-8">
   $(function(){
-      attachListeners()
+      attachListeners();
   })
 </script>
