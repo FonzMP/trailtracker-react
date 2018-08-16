@@ -26,7 +26,9 @@ class TrailsController < ApplicationController
     else
       @trail = Trail.create(trail_params)
 
-      render json: @trail, status: 201
+      if @trail.save
+        render json: @trail, status: 201
+      end
     end
   end
 
