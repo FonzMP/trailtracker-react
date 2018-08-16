@@ -92,7 +92,8 @@
       <%= f.hidden_field :user_id, value: @user.id %>
       <%= f.label "Select Trail: " %>
       <br>
-      <%= f.collection_select :trail_id, @user.unowned_trails, :id, :name %>
+      <select name="trail_rating[trail_id]" id="trail_rating_trail_id">
+      </select>
       <br>
       <br>
       <%= f.label "Select Personal Rating: " %>

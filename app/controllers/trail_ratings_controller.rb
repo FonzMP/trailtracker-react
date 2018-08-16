@@ -2,6 +2,18 @@ class TrailRatingsController < ApplicationController
 
   before_action :current_user
 
+  def index
+    @trail_ratings = @current_user.unowned_trails
+
+    render json: @trail_ratings
+  end
+
+  def rated_trails
+    @trail_ratings = @current_user.trail_ratings
+
+    render json: @trail_ratings
+  end
+
   def show
     @trail_rating = TrailRating.find(params[:id])
     render json: @trail_rating, status: 201
@@ -9,7 +21,7 @@ class TrailRatingsController < ApplicationController
 
   def create
     @trail_rating = TrailRating.create(trail_rating_params)
-    if @trail_rating
+    if @trail_rating.save
       render json: @trail_rating
     end
   end
