@@ -25,32 +25,26 @@ function applyHidden(clicked) {
     "#trail_form",
     "#trail_ratings_form"
   ];
-  for (let i = 0; i < buttons.length; i++) {
-    if (clicked.id === buttons[i]) {
-      $(views[jQuery.inArray(buttons[i], buttons)]).removeClass("hidden");
-      $("#" + buttons[i]).addClass("backing");
-      if (buttons[i] === "trails") {
-        $.get("/trails.json", function(data) {
-          $("#all_trails").html("<h3>All trails on TrailTracker</h3>");
-          data.forEach(function(trail) {
-            $("#all_trails").append(
-              `
-              <p><strong>Name: </strong>${trail.name}</p>
-              <div id="trail-info-${trail.id}">
-              <a href="#" id="trail-${trail.id}" data-trail="${
-                trail.id
-              }" class="trail-details" >View ${trail.name} Trail Info</a>
-              </div>
-              <br>
-              `
-            );
-          });
-          trailDetails();
-        });
+
+  if ($(clicked).hasClass("backing")) {
+    $(clicked).removeClass("backing");
+    $(views[jQuery.inArray(clicked.id, buttons)]).addClass("hidden");
+  } else {
+    for (let i = 0; i < buttons.length; i++) {
+      if (clicked.id === buttons[i]) {
+        $(views[jQuery.inArray(buttons[i], buttons)]).removeClass("hidden");
+        $("#" + buttons[i]).addClass("backing");
+        if (buttons[i] === "trails") {
+          getTrails();
+        } else if (buttons[i] === "add-trail-rating") {
+          setTrailRatings();
+        } else if (buttons[i] === "user-trail-ratings") {
+          getTrailRatings();
+        }
+      } else {
+        $(views[jQuery.inArray(buttons[i], buttons)]).addClass("hidden");
+        $("#" + buttons[i]).removeClass("backing");
       }
-    } else {
-      $(views[jQuery.inArray(buttons[i], buttons)]).addClass("hidden");
-      $("#" + buttons[i]).removeClass("backing");
     }
   }
 }
