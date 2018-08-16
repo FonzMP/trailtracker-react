@@ -10,20 +10,6 @@ function toggleDisplay(buttonClicked, showText, hideText, renderedForm) {
   });
 }
 
-function setMessageTrailRatings(post) {
-  post.done(function(tr) {
-    $("#success_message").html(`
-      <h3>Successfully created a trail rating for ${tr.trail.name} trail.</h3>
-      <p><strong>Name: </strong>${tr.trail.name}</p>
-      <p><strong>Length: </strong>${tr.trail.length}</p>
-      <p><strong>Rating: </strong>${tr.rating}</p>
-    `);
-    $("#trail_ratings_form").addClass("hidden");
-    $("#add-trail-rating").text("Add a Trail Rating");
-    $("#trail-rating-submit").prop("disabled", false);
-  });
-}
-
 function clearMessage() {
   setTimeout(function() {
     $("#success_message").slideUp();
@@ -87,19 +73,19 @@ function attachListeners() {
     "#trail_ratings_form"
   );
 
-  $("form#new_trail").submit(function(e) {
-    e.preventDefault();
-    const values = $(this).serialize();
-    const post = $.post("/trails", values);
-    setMessageTrails(post);
-    clearMessage();
-  });
-
   $("form#new_trail_rating").submit(function(e) {
     e.preventDefault();
     const values = $(this).serialize();
     const post = $.post("/trail_ratings", values);
     setMessageTrailRatings(post);
+    clearMessage();
+  });
+
+  $("form#new_trail").submit(function(e) {
+    e.preventDefault();
+    const values = $(this).serialize();
+    const post = $.post("/trails", values);
+    setMessageTrails(post);
     clearMessage();
   });
 }

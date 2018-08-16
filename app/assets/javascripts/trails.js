@@ -37,11 +37,3 @@ function setMessageTrails(post) {
     $("input#new-trail-submit").prop("disabled", false);
   });
 }
-
-$("form#new_trail").submit(function(e) {
-  e.preventDefault();
-  const values = $(this).serialize();
-  const post = $.post("/trails", values);
-  setMessageTrails(post);
-  clearMessage();
-});
