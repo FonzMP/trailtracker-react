@@ -1,10 +1,22 @@
+class TrailRating {
+  constructor(trailRating) {
+    this.name = trailRating.trail.name;
+    this.length = trailRating.trail.length;
+    this.username = trailRating.user.username;
+    this.rating = trailRating.rating;
+  }
+}
+
 function setMessageTrailRatings(post) {
   post.done(function(tr) {
+    const newTrailRating = new TrailRating(tr);
     $("#success_message").html(`
-      <h3>Successfully created a trail rating for ${tr.trail.name} trail.</h3>
-      <p><strong>Name: </strong>${tr.trail.name}</p>
-      <p><strong>Length: </strong>${tr.trail.length}</p>
-      <p><strong>Rating: </strong>${tr.rating}</p>
+      <h3>Successfully created a trail rating for ${
+        newTrailRating.name
+      } trail.</h3>
+      <p><strong>Name: </strong>${newTrailRating.name}</p>
+      <p><strong>Length: </strong>${newTrailRating.length}</p>
+      <p><strong>Rating: </strong>${newTrailRating.rating}</p>
     `);
     $("#trail_ratings_form").addClass("hidden");
     $("#add-trail-rating").text("Add a Trail Rating");
@@ -20,27 +32,30 @@ function setTrailRatings() {
       $("#trail_rating_trail_id").append(
         `<option value="${data[0].id}">${data[0].name}</option>`
       );
-      if (data.length > 0) {
-        for (let i = 1; i < data.length; i++)
-          $("#trail_rating_trail_id").append(`
+      for (let i = 1; i < data.length; i++)
+        $("#trail_rating_trail_id").append(`
           <option value="${data[i].id}">${data[i].name}</option>
           `);
-      }
     }
   });
 }
 
 function getTrailRatings() {
   $.get("/trails_rated.json", function(data) {
+    console.log(data);
+
     if (data.length > 0) {
       let i = 1;
       data.forEach(function(tr) {
+        const newTrailRating = new TrailRating(tr);
         $("#user_tr_display").append(`
           <h4>Trail Rating - ${i}</h4>
-          <p><strong>Name: </strong>${tr.trail.name}</p>
-          <p><strong>Length: </strong>${tr.trail.length}</p>
-          <p><strong>Rating: </strong>${tr.rating}</p>
-          <a href="/trail_ratings/${tr.id}">Delete this Trail Rating</a>
+          <p><strong>Name: </strong>${newTrailRating.name}</p>
+          <p><strong>Length: </strong>${newTrailRating.length}</p>
+          <p><strong>Rating: </strong>${newTrailRating.rating}</p>
+          <a href="/trail_ratings/${
+            newTrailRating.id
+          }">Delete this Trail Rating</a>
         `);
         i++;
       });
