@@ -10,42 +10,17 @@ function toggleDisplay(buttonClicked, showText, hideText, renderedForm) {
   });
 }
 
-function trailDetails() {
-  $("a.trail-details").click(function(e) {
-    e.preventDefault();
-    const trailId = $(this).data("trail");
-    $.get(`/trails/${trailId}.json`, function(data) {
-      const trailName = data.name;
-      $(`#trail-info-${trailId}`).html(
-        `
-        <p><strong>Length: </strong> ${data.length}</p>
-        <a href="#" id="hide-info-${trailId}">Hide Trail Info</a>
-      `
-      );
-      hideDetails(trailId, trailName);
-    });
-  });
-}
-
-function hideDetails(id, name) {
-  $("#hide-info-" + id).click(function(e) {
-    e.preventDefault();
-    $("#trail-info-" + id).html(
-      `<a href="#" id="trail-${id}" data-trail="${id}" class="trail-details" >View ${name} Trail Info</a>`
-    );
-    trailDetails();
-  });
-}
-
-function setMessage(post) {
-  post.done(function(trail) {
+function setMessageTrailRatings(post) {
+  post.done(function(tr) {
     $("#success_message").html(`
-      <h3>You've successfully created ${trail.name} trail</h3>
-      <p><strong>Name: </strong>${trail.name}</p>
-      <p><strong>Length: </strong>${trail.length}</p>
+      <h3>Successfully created a trail rating for ${tr.trail.name} trail.</h3>
+      <p><strong>Name: </strong>${tr.trail.name}</p>
+      <p><strong>Length: </strong>${tr.trail.length}</p>
+      <p><strong>Rating: </strong>${tr.rating}</p>
     `);
-    $("#trail_name").val("");
-    $("#trail_length").val("");
+    $("#trail_ratings_form").addClass("hidden");
+    $("#add-trail-rating").text("Add a Trail Rating");
+    $("#trail-rating-submit").prop("disabled", false);
   });
 }
 
@@ -56,9 +31,9 @@ function clearMessage() {
 }
 
 function attachListeners() {
-  $("#trails").click(function(e) {
+  $("#trails").click(function() {
     $.get("/trails.json", function(data) {
-      $("#all_trails").html(" ");
+      $("#all_trails").html("<h3>All trails on TrailTracker</h3>");
       data.forEach(function(trail) {
         $("#all_trails").append(
           `
@@ -116,7 +91,15 @@ function attachListeners() {
     e.preventDefault();
     const values = $(this).serialize();
     const post = $.post("/trails", values);
-    setMessage(post);
+    setMessageTrails(post);
+    clearMessage();
+  });
+
+  $("form#new_trail_rating").submit(function(e) {
+    e.preventDefault();
+    const values = $(this).serialize();
+    const post = $.post("/trail_ratings", values);
+    setMessageTrailRatings(post);
     clearMessage();
   });
 }
