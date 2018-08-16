@@ -42,39 +42,7 @@
 </div>
 
 <div id="user_tr_display" class="hidden">
-<h3>Trail Ratings from <%= @user.username %></h3>
-
-<% if @user.trail_ratings.blank? %>
-  <h3>You have no trails currently listed.</h3>
-<% end %>
-
-  <% @user.trail_ratings.each do |tr| %>
-    <% if tr.trail != nil %>
-      <strong>Name: </strong>
-      <br>
-      <%= tr.trail.name %>
-      <br>
-      <br>
-      <strong>Length: </strong>
-      <br>
-      <%= tr.trail.length %>
-      <br>
-      <br>
-      <strong>Your Rating: </strong>
-      <br>
-      <%= tr.rating %>
-      <br>
-      <br>
-      <% if validate_user %>
-        <%= link_to "Edit This Trail Rating", edit_trail_rating_path(tr) %>
-        <br>
-        <%= link_to "Delete This Trail Rating", tr, method: :delete, data: { confirm: "Are you sure?" } %>  
-      <% end %>
-      <br>
-      <br>
-      <hr>
-    <% end %>
-  <% end %>
+  <h3>Trail Ratings from <%= @user.username %></h3>
 </div>
 
 <div id="trail_form" class="hidden">

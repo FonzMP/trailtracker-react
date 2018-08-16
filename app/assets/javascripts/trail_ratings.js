@@ -33,13 +33,16 @@ function setTrailRatings() {
 function getTrailRatings() {
   $.get("/trails_rated.json", function(data) {
     if (data.length > 0) {
+      let i = 1;
       data.forEach(function(tr) {
-        $("#user_tr_display").html(`
+        $("#user_tr_display").append(`
+          <h4>Trail Rating - ${i}</h4>
           <p><strong>Name: </strong>${tr.trail.name}</p>
           <p><strong>Length: </strong>${tr.trail.length}</p>
           <p><strong>Rating: </strong>${tr.rating}</p>
           <a href="/trail_ratings/${tr.id}">Delete this Trail Rating</a>
         `);
+        i++;
       });
     } else {
       $("#user_tr_display").html("You have no trails currently rated!");
