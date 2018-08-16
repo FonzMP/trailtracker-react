@@ -1,13 +1,22 @@
+class Trail {
+  constructor(trail) {
+    this.id = trail.id;
+    this.name = trail.name;
+    this.length = trail.length;
+  }
+}
+
 function trailDetails() {
   $("a.trail-details").click(function(e) {
     e.preventDefault();
     const trailId = $(this).data("trail");
     $.get(`/trails/${trailId}.json`, function(data) {
       const trailName = data.name;
-      $(`#trail-info-${trailId}`).html(
+      const trail = new Trail(data);
+      $(`#trail-info-${trail.id}`).html(
         `
-        <p><strong>Length: </strong> ${data.length}</p>
-        <a href="#" id="hide-info-${trailId}">Hide Trail Info</a>
+        <p><strong>Length: </strong> ${trail.length}</p>
+        <a href="#" id="hide-info-${trail.id}">Hide Trail Info</a>
       `
       );
       hideDetails(trailId, trailName);
@@ -27,10 +36,11 @@ function hideDetails(id, name) {
 
 function setMessageTrails(post) {
   post.done(function(trail) {
+    let newTrail = new Trail(trail);
     $("#success_message").html(`
-    <h3>You've successfully created ${trail.name} trail</h3>
-    <p><strong>Name: </strong>${trail.name}</p>
-    <p><strong>Length: </strong>${trail.length}</p>
+    <h3>You've successfully created ${newTrail.name} trail</h3>
+    <p><strong>Name: </strong>${newTrail.name}</p>
+    <p><strong>Length: </strong>${newTrail.length}</p>
     `);
     $("#trail_name").val("");
     $("#trail_length").val("");
