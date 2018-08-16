@@ -43,11 +43,11 @@
 </div>
 
 <div id="user_tr_display" class="hidden">
-  <% if @user.trail_ratings.blank? %>
-    <h3>You have no trails currently listed.</h3>
-  <% end %>
+<h3>Trail Ratings from <%= @user.username %></h3>
 
-  <h3>Trail Ratings from <%= @user.username %></h3>
+<% if @user.trail_ratings.blank? %>
+  <h3>You have no trails currently listed.</h3>
+<% end %>
 
   <% @user.trail_ratings.each do |tr| %>
     <% if tr.trail != nil %>
@@ -101,7 +101,7 @@
       <%= f.select "rating", options_for_select(1..5, 3) %>
       <br>
       <br>
-      <%= f.submit %>
+      <%= f.submit id: "trail-rating-submit" %>
 
       <% end %>
     <% else %>
