@@ -3,6 +3,7 @@ class Trail {
     this.id = trail.id;
     this.name = trail.name;
     this.length = trail.length;
+    this.rating = trail.average_rating;
   }
 }
 
@@ -16,6 +17,7 @@ function trailDetails() {
       $(`#trail-info-${trail.id}`).html(
         `
         <p><strong>Length: </strong> ${trail.length}</p>
+        <p><strong>Average Rating: </strong> ${trail.rating}</p>
         <a href="#" id="hide-info-${trail.id}">Hide Trail Info</a>
       `
       );

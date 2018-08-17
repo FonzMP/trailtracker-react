@@ -10,4 +10,15 @@ class Trail < ApplicationRecord
     User.find(self.created_by)
   end
 
+  def average_rating
+    @trail = TrailRating.where(trail_id: self.id)
+    sum = 0
+    @trail.each {|tr| sum += tr.rating}
+    if @trail.length > 0
+      sum.to_f / @trail.length.to_f
+    else
+      "Unrated currently"
+    end
+  end
+
 end
