@@ -29,10 +29,7 @@ function setTrailRatings() {
   $.get("/trail_ratings", function(data) {
     if (data.length > 0) {
       $("#trail_rating_trail_id").html("");
-      $("#trail_rating_trail_id").append(
-        `<option value="${data[0].id}">${data[0].name}</option>`
-      );
-      for (let i = 1; i < data.length; i++)
+      for (let i = 0; i < data.length; i++)
         $("#trail_rating_trail_id").append(`
           <option value="${data[i].id}">${data[i].name}</option>
           `);
@@ -42,8 +39,6 @@ function setTrailRatings() {
 
 function getTrailRatings() {
   $.get("/trails_rated.json", function(data) {
-    console.log(data);
-
     if (data.length > 0) {
       let i = 1;
       data.forEach(function(tr) {
