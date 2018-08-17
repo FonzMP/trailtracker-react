@@ -4,6 +4,8 @@ class Trail {
     this.name = trail.name;
     this.length = trail.length;
     this.rating = trail.average_rating;
+    this.creator = trail.created_by_username;
+    this.user_page = trail.created_by_page;
   }
 }
 
@@ -18,6 +20,9 @@ function trailDetails() {
         `
         <p><strong>Length: </strong> ${trail.length}</p>
         <p><strong>Average Rating: </strong> ${trail.rating}</p>
+        <p><strong>Contributed by: </strong> <a href="/users/${
+          trail.user_page
+        }">${trail.creator}</a></p>
         <a href="#" id="hide-info-${trail.id}">Hide Trail Info</a>
       `
       );
