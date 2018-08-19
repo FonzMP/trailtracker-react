@@ -45,6 +45,7 @@ function setTrailRatings() {
 function getTrailRatings() {
   $.get("/trails_rated.json", function(data) {
     if (data.length > 0) {
+      $("#user_tr_display").html("");
       data.forEach(function(tr) {
         let newTrailRating = new TrailRating(tr);
         $("#user_tr_display").append(newTrailRating.displayTrailRating());
