@@ -1,11 +1,20 @@
-function Trail(trail) {
+const Trail = function(trail) {
   this.id = trail.id;
   this.name = trail.name;
   this.length = trail.length;
   this.rating = trail.average_rating;
   this.creator = trail.created_by_username;
   this.user_page = trail.created_by_page;
-}
+};
+
+Trail.prototype.displayTrail = function() {
+  return `<p><strong>Length: </strong> ${this.length}</p>
+        <p><strong>Average Rating: </strong> ${this.rating}</p>
+        <p><strong>Contributed by: </strong> <a href="/users/${
+          this.user_page
+        }">${this.creator}</a></p>
+        <a href="#" id="hide-info-${this.id}">Hide Trail Info</a>`;
+};
 
 function trailDetails() {
   $("a.trail-details").click(function(e) {
@@ -14,16 +23,7 @@ function trailDetails() {
     $.get(`/trails/${trailId}.json`, function(data) {
       const trailName = data.name;
       const trail = new Trail(data);
-      $(`#trail-info-${trail.id}`).html(
-        `
-        <p><strong>Length: </strong> ${trail.length}</p>
-        <p><strong>Average Rating: </strong> ${trail.rating}</p>
-        <p><strong>Contributed by: </strong> <a href="/users/${
-          trail.user_page
-        }">${trail.creator}</a></p>
-        <a href="#" id="hide-info-${trail.id}">Hide Trail Info</a>
-      `
-      );
+      $(`#trail-info-${trail.id}`).html(trail.displayTrail());
       hideDetails(trailId, trailName);
     });
   });
