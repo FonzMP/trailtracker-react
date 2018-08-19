@@ -17,7 +17,7 @@ class Trail < ApplicationRecord
     if @trail.length > 0
       sum.to_f / @trail.length.to_f
     else
-      "Unrated currently"
+      "Currently unrated!"
     end
   end
 

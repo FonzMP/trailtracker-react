@@ -1,10 +1,8 @@
-class TrailRating {
-  constructor(trailRating) {
-    this.name = trailRating.trail.name;
-    this.length = trailRating.trail.length;
-    this.username = trailRating.user.username;
-    this.rating = trailRating.rating;
-  }
+function TrailRating(trailRating) {
+  this.name = trailRating.trail.name;
+  this.length = trailRating.trail.length;
+  this.username = trailRating.user.username;
+  this.rating = trailRating.rating;
 }
 
 function setMessageTrailRatings(post) {
@@ -48,9 +46,7 @@ function getTrailRatings() {
           <p><strong>Name: </strong>${newTrailRating.name}</p>
           <p><strong>Length: </strong>${newTrailRating.length}</p>
           <p><strong>Rating: </strong>${newTrailRating.rating}</p>
-          <a href="/trail_ratings/${
-            newTrailRating.id
-          }">Delete this Trail Rating</a>
+          
         `);
         i++;
       });

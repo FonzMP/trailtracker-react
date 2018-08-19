@@ -1,12 +1,10 @@
-class Trail {
-  constructor(trail) {
-    this.id = trail.id;
-    this.name = trail.name;
-    this.length = trail.length;
-    this.rating = trail.average_rating;
-    this.creator = trail.created_by_username;
-    this.user_page = trail.created_by_page;
-  }
+function Trail(trail) {
+  this.id = trail.id;
+  this.name = trail.name;
+  this.length = trail.length;
+  this.rating = trail.average_rating;
+  this.creator = trail.created_by_username;
+  this.user_page = trail.created_by_page;
 }
 
 function trailDetails() {
