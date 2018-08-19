@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 
+  helper_method :logged_in?
   before_action :current_user
 
   def welcome
