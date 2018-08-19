@@ -58,19 +58,23 @@ function setMessageTrails(post) {
 function getTrails() {
   $.get("/trails.json", function(data) {
     $("#all_trails").html("<h3>All trails on TrailTracker</h3>");
-    data.forEach(function(trail) {
-      $("#all_trails").append(
-        `
-        <p><strong>Name: </strong>${trail.name}</p>
-        <div id="trail-info-${trail.id}">
-        <a href="#" id="trail-${trail.id}" data-trail="${
-          trail.id
-        }" class="trail-details" >View ${trail.name} Trail Info</a>
-        </div>
-        <br>
-        `
-      );
-    });
+    appendTrails(data);
     trailDetails();
+  });
+}
+
+function appendTrails(data) {
+  data.forEach(function(trail) {
+    $("#all_trails").append(
+      `
+    <p><strong>Name: </strong>${trail.name}</p>
+    <div id="trail-info-${trail.id}">
+    <a href="#" id="trail-${trail.id}" data-trail="${
+        trail.id
+      }" class="trail-details" >View ${trail.name} Trail Info</a>
+    </div>
+    <br>
+    `
+    );
   });
 }
