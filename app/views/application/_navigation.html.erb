@@ -1,10 +1,14 @@
-<% if !logged_in? %>
-  <p class="nav_link"><%= link_to "Log In", login_path %></p>
-  <p class="nav_link"><%= link_to "Sign Up!", new_user_path %></p>
-<% else %>
-<p class="nav_link"><%= link_to "Log Out", logout_path, method: :delete %></p>
-<p class="nav_link"><%= link_to "Your Profile Page", user_path(@current_user) %></p>
-<p class="nav_link"><%= link_to "View all trails", trails_path %></p>
-<p class="nav_link"><%= link_to "View all Users", users_path %></p>
-<% end %>
-<p class="nav_link"><%= link_to "Home", root_path %></p>
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand">TrailTracker</a>
+  <form class="form-inline">
+    <button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "Home", root_path %></button>
+    <% if !logged_in? %>
+      <button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "Log In", login_path %></button>
+      <button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "Sign Up!", new_user_path %></button>
+    <% else %>
+      <button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "View all Users", users_path %></button>
+      <button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "Profile Page", user_path(@current_user) %></button>
+      <button class="btn btn-sm btn-outline-secondary" type="button"><%= link_to "Log Out", logout_path, method: :delete %></button>
+    <% end %>
+  </form>
+</nav>
