@@ -11,5 +11,5 @@
   <%= f.number_field :length, min: 0, max: 50, step: 0.1 %>
   <br>
   <br>
-  <%= f.submit id: "new-trail-submit" %>
+  <%= f.submit id: "new-trail-submit", data: { disable_with: false } %>
 <% end %>
