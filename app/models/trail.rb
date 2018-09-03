@@ -21,14 +21,4 @@ class Trail < ApplicationRecord
     end
   end
 
-  def created_by_username
-    @user = User.find(self.created_by)
-    @user.username
-  end
-
-  def created_by_page
-    @user = User.find(self.created_by)
-    @user.id
-  end
-
 end
