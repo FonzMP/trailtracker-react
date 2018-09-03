@@ -53,6 +53,7 @@ function clearMessage() {
   setTimeout(function() {
     $("#success_message").slideUp();
   }, 5000);
+  $("#success_message").css("display", "block");
 }
 
 function attachListeners() {
