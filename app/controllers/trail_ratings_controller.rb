@@ -3,7 +3,7 @@ class TrailRatingsController < ApplicationController
   before_action :current_user
 
   def index
-    @trail_ratings = @current_user.unowned_trails
+    @trail_ratings = TrailRating.all
 
     render json: @trail_ratings
   end
