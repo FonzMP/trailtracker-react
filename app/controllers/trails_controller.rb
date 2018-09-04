@@ -1,17 +1,11 @@
 class TrailsController < ApplicationController
 
   before_action :current_user
+  protect_from_forgery with: :null_session
 
   def index
-    if params[:user_id]
-      @user = User.find(params[:user_id])
-    else
-      @trails = Trail.all
-      respond_to do |format|
-        format.html
-        format.json {render json: @trails}
-      end
-    end
+    @trails = Trail.all
+    render json: @trails, status: 201
   end
 
   def new
@@ -19,16 +13,10 @@ class TrailsController < ApplicationController
   end
 
   def create
-    if !logged_in?
-      @message = ["You must be logged in to create a trail. Please login below."]
-      
-      render "sessions/new"
-    else
-      @trail = Trail.create(trail_params)
+    @trail = Trail.create(trail_params)
 
-      if @trail.save
-        render json: @trail, status: 201
-      end
+    if @trail.save
+      render json: @trail, status: 201
     end
   end
 
