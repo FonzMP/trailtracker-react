@@ -49,13 +49,9 @@ class TrailsController < ApplicationController
   end
 
   def destroy
-    if !logged_in?
-      redirect_to login_path
-    else
-      @trail = Trail.find(params[:id]).destroy
+    @trail = Trail.find(params[:id]).destroy
 
-      redirect_to user_path(@current_user)
-    end
+    render json: @trail, status: 201
   end
   
   private
