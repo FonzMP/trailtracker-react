@@ -39,10 +39,9 @@ class TrailRatingsController < ApplicationController
   end
 
   def destroy
-    @trail_rating = TrailRating.find(params[:id])
-    @trail_rating.destroy
-
-    redirect_to user_path(@current_user)
+    @rating = TrailRating.find(params[:id]).destroy
+    
+    render json: @rating, status: 201
   end
 
   private
