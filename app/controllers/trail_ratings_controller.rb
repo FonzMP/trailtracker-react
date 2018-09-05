@@ -21,6 +21,7 @@ class TrailRatingsController < ApplicationController
 
   def create
     @trail_rating = TrailRating.create(trail_rating_params)
+
     if @trail_rating.save
       render json: @trail_rating
     end

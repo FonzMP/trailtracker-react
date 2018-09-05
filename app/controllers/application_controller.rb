@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :logged_in?
   before_action :current_user
+  protect_from_forgery with: :null_session
 
   def welcome
 

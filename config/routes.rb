@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
   resources :trails
   resources :trail_ratings, only: [:index, :show, :create, :edit, :destroy, :update]
+  post '/trail_ratings', to: "trail_ratings#create"
   get '/trails_rated', to: "trail_ratings#rated_trails"
   get '/signup', to: "users#new"
   get '/login', to: "sessions#new"
