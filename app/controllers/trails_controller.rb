@@ -29,23 +29,16 @@ class TrailsController < ApplicationController
 
   def edit
     @trail = Trail.find(params[:id])
-    invalid_user?
+    render json: @trail, status: 201
   end
 
 
   def update
     @trail = Trail.find(params[:id])
-    if !(@current_user.id == @trail.created_by)
-      @user = User.find(@current_user.id)
-      @trail_rating = TrailRating.new
-      @message = ["That is not your trail!"]
-
-      render 'users/show'
-    else
-      @trail.update(trail_params)
+    
+    @trail.update(trail_params)
      
-      redirect_to trail_path(@trail)
-    end
+    render json: @trail, status: 201
   end
 
   def destroy
